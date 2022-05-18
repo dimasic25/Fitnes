@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Contact List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Отчёт по клиентам</h1>
+<a class="btn" th:href="@{/verify}">Назад к меню</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Логин клиента</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Фамилия</th>
+            <th>Дата рождения</th>
+            <th>Кол-во купленных абонементов</th>
+            <th>Общая цена абонементов</th>
+        </tr>
+        <tr th:each ="client : ${clients}">
+            <td th:utext="${client.login}">...</td>
+            <td th:utext="${client.firstName}">...</td>
+            <td th:utext="${client.middleName}">...</td>
+            <td th:utext="${client.lastName}">...</td>
+            <td th:utext="${client.birthdate}">...</td>
+            <td th:utext="${client.numberSubs}">...</td>
+            <td th:utext="${client.price}">...</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

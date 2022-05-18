@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="rus">
+<head>
+    <meta charset="UTF-8" />
+    <title>Авторизация</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Вход</h1>
+<form th:action="@{/verify}"
+      th:object="${client}" method="POST">
+    <table border="0">
+        <tr>
+            <td>Логин</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{login}" /></td>
+        </tr>
+        <tr>
+            <td>Пароль</td>
+            <td>:</td>
+            <td><input type="password" th:field="*{password}" /></td>
+        </tr>
+    </table>
+    <input class="btn" type="submit" th:value="Вход"/>
+</form>
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"></div>
+</body>
+</html>

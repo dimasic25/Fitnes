@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${add} ? 'Создать абонемент' : 'Изменить абонемент'"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1 th:text="${add} ? 'Создать абонемент' : 'Изменить абонемент'"></h1>
+<a th:href="@{/subs}">Назад</a>
+<br/><br/>
+<form th:action="${add} ? @{/subs/add} : @{/subs/{subId}/edit(subId=${sub.id})}"
+      th:object="${sub}" method="POST">
+    <table border="0">
+        <tr>
+            <td>Логин клиена</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{clientLogin}" /></td>
+        </tr>
+        <tr>
+            <td>Дата начала</td>
+            <td>:</td>
+            <td><input type="date" th:field="*{startDate}" /></td>
+        </tr>
+        <tr>
+            <td>Дата окончания</td>
+            <td>:</td>
+            <td><input type="date" th:field="*{endDate}" /></td>
+        </tr>
+        <tr>
+            <td>Цена</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{price}" /></td>
+        </tr>
+        <tr th:unless="${add}">
+            <td>Закрыть?</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{closed}"  /></td>
+        </tr>
+    </table>
+    <input class="btn" type="submit" th:value="${add} ? 'Создать' : 'Обновить'" />
+</form>
+
+<br/>
+<!-- Check if errorMessage is not null and not empty -->
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"></div>
+</body>
+</html>
