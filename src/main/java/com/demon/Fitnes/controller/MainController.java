@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 @Controller
 
@@ -32,22 +34,25 @@ public class MainController {
     }
 
     @PostMapping("/verify")
-    public String verifyClient(Model model, @ModelAttribute("client") Client client) {
+    public String verifyClient(Model model, @ModelAttribute("client") Client client, HttpSession session) {
         try {
             clientService.verifyClient(client);
             model.addAttribute("client", client);
+            session.setAttribute("login", client.getLogin());
 
-            return "redirect:/subs/" + client.getLogin();
+            if (Objects.equals(client.getLogin(), "admin")) {
+                session.setAttribute("isAdmin", true);
+                return "redirect:/admin/subs";
+            } else {
+                session.setAttribute("isAdmin", false);
+                return "redirect:/subs";
+            }
+
         } catch (Exception e) {
             String errorMessage = e.getMessage();
             model.addAttribute("errorMessage", errorMessage);
             return "index";
         }
-    }
-
-    @GetMapping("/verify")
-    public String getMenu() {
-        return "main";
     }
 
     @GetMapping("/register")
@@ -58,14 +63,22 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String registerClient(Model model, @ModelAttribute("client") Client client, @ModelAttribute("birthdate") String birthdate) {
+    public String registerClient(Model model, @ModelAttribute("client") Client client, @ModelAttribute("birthdate") String birthdate, HttpSession session) {
         try {
             Date clientBirthdate = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
             client.setBirthdate(clientBirthdate);
             clientService.registerClient(client);
             model.addAttribute("client", client);
+            session.setAttribute("login", client.getLogin());
 
-            return "redirect:/subs/" + client.getLogin();
+            if (Objects.equals(client.getLogin(), "admin")) {
+                session.setAttribute("isAdmin", true);
+                return "redirect:/admin/subs";
+            } else {
+                session.setAttribute("isAdmin", false);
+                return "redirect:/subs";
+            }
+
         } catch (Exception e) {
             String errorMessage = e.getMessage();
             model.addAttribute("errorMessage", errorMessage);

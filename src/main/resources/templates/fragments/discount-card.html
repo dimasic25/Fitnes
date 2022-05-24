@@ -1,0 +1,6 @@
+<div class="card text-dark bg-info mb-3" th:fragment="discount-card(discount)">
+    <div class="card-body ">
+        <div th:text="'Скидка на услугу: ' + ${discount.service.name}"></div>
+        <div th:text="'Размер скидки: ' + ${discount.amount} + ' %'"></div>
+    </div>
+</div>

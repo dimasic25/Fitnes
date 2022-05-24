@@ -1,16 +1,16 @@
 <div th:fragment="nav-panel(client)">
-<ul class="nav nav-tabs justify-content-center bg-dark">
+<ul class="nav nav-tabs justify-content-center bg-dark" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" th:href="@{/subs/{login}(login =${client.login})}">Абонементы</a>
+        <a class="nav-link active" id="sub-tab" data-toggle="tab" href="/subs">Абонементы</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/">Скидки</a>
+        <a class="nav-link" id="discount-tab" data-toggle="tab" href="/discounts">Скидки</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/">Услуги</a>
+        <a class="nav-link" href="/services">Услуги</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/">Тренеры</a>
+        <a class="nav-link" href="/coaches">Тренеры</a>
     </li>
     <li class="nav-item">
         <a class="nav-link disabled text-info" tabindex="-1" aria-disabled="true" th:text="'Здравствуйте, ' + ${client.login}"></a>

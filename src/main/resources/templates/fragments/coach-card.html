@@ -1,0 +1,6 @@
+<div class="card text-dark bg-info mb-3" th:fragment="coach-card(coach)">
+    <div class="card-body ">
+        <div th:text="'Тренер: ' + ${coach.firstName} + ' ' + ${coach.middleName} + ' ' + ${coach.secondName}"></div>
+        <div th:text="'Опыт работы (количество лет): ' + ${coach.experience}"></div>
+    </div>
+</div>

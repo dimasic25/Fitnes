@@ -1,0 +1,7 @@
+<div class="card text-dark bg-info mb-3" th:fragment="service-card(service)">
+    <div class="card-body ">
+        <div th:text="'Название услуги: ' + ${service.name}"></div>
+        <div th:text="'Цена: ' + ${service.price}"></div>
+        <div th:text="'Место занятий: ' + ${service.place}"></div>
+    </div>
+</div>

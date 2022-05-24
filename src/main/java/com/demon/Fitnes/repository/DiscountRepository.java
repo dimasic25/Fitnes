@@ -28,10 +28,11 @@ public class DiscountRepository {
 
     public List<Discount> findDiscountsByClient(String clientLogin) {
         final String sql = """
-                    SELECT discount_id, service_id, amount, discount_number_visits
-                    FROM discount
+                    SELECT discount.discount_id, service_id, amount, discount_number_visits
+                    FROM discount                 
                     INNER JOIN client_discount
-                    ON client_discount.client_login = :clientLogin;
+                    ON client_discount.client_login = :clientLogin
+                    WHERE client_discount.discount_id = discount.discount_id;               
                     """;
 
         var params = new MapSqlParameterSource()
