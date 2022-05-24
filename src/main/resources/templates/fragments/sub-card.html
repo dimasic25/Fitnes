@@ -1,0 +1,10 @@
+<div class="card text-dark bg-info mb-3" th:fragment="sub-card(sub, login)">
+    <div class="card-body ">
+        <div th:text="'Абонемент №' + ${sub.id}"></div>
+        <div th:text="'Дата начала: ' + ${sub.startDate}"></div>
+        <div th:text="'Дата окончания: ' + ${sub.endDate}"></div>
+        <div th:text="'Стоимость: ' + ${sub.price}"></div>
+        <div th:if="${sub.closed}">Закрыт</div>
+        <a class="link-warning" th:href="@{'/subs/' + ${login} + '/' + ${sub.id}}">Узнать услуги, включенные в абонемент</a>
+    </div>
+</div>

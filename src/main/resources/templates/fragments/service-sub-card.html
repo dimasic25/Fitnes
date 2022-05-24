@@ -1,0 +1,8 @@
+<div class="card text-dark bg-info mb-3" th:fragment="service-sub-card(card)">
+    <div class="card-body ">
+        <div th:text="'Услуга: ' + ${card.service.name}"></div>
+        <div th:text="'Количество занятий: ' + ${card.numberSessions}"></div>
+        <div th:text="'Количество посещений: ' + ${card.numberVisits}"></div>
+        <div th:text="'Номер группы: ' + ${card.groupNumber}"></div>
+    </div>
+</div>
