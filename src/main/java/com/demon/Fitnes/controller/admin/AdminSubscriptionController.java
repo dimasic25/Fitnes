@@ -1,4 +1,4 @@
-package com.demon.Fitnes.controller;
+package com.demon.Fitnes.controller.admin;
 
 import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.model.Subscription;
