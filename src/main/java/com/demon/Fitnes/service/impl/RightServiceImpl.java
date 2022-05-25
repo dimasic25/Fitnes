@@ -1,6 +1,5 @@
 package com.demon.Fitnes.service.impl;
 
-import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.repository.ClientRepository;
 import com.demon.Fitnes.service.RightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
-import java.util.Objects;
 
 @Service
 public class RightServiceImpl implements RightService {
@@ -36,6 +34,18 @@ public class RightServiceImpl implements RightService {
 
     @Override
     public boolean isUserAdmin(HttpSession session, Model model) {
-        return isUserAuthored(session, model) && Objects.equals((String) session.getAttribute("login"), "admin");
+        if (isUserAuthored(session, model)) {
+            if (clientRepository.findAdminByLogin((String) session.getAttribute("login")).isPresent()) {
+                model.addAttribute("isAdmin", true);
+                session.setAttribute("isAdmin", true);
+                return true;
+            } else {
+                model.addAttribute("isAdmin", false);
+                session.setAttribute("isAdmin", false);
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }

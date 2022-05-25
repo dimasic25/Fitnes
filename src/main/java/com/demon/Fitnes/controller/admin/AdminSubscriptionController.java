@@ -1,8 +1,7 @@
 package com.demon.Fitnes.controller.admin;
 
-import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.model.Subscription;
-import com.demon.Fitnes.service.ClientService;
+import com.demon.Fitnes.service.RightService;
 import com.demon.Fitnes.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,59 +16,52 @@ import java.util.List;
 public class AdminSubscriptionController {
 
     private final SubscriptionService subscriptionService;
-    private final ClientService clientService;
+    private final RightService rightService;
 
     @Autowired
-    public AdminSubscriptionController(SubscriptionService subscriptionService, ClientService clientService) {
+    public AdminSubscriptionController(SubscriptionService subscriptionService, RightService rightService) {
         this.subscriptionService = subscriptionService;
-        this.clientService = clientService;
+        this.rightService = rightService;
     }
 
     @GetMapping("/subs")
     public String findAllSubs(Model model, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
-        model.addAttribute("client", client);
-        model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
-
-        List<Subscription> subscriptions = subscriptionService.getAllSubs();
-
-        model.addAttribute("client", client);
-        model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
-        model.addAttribute("subs", subscriptions);
-        return "subscriptions";
+        if (!rightService.isUserAdmin(session, model)) {
+            return "forbbiden";
+        } else {
+            List<Subscription> subscriptions = subscriptionService.getAllSubs();
+            model.addAttribute("subs", subscriptions);
+            return "subscriptions";
+        }
     }
 
     @GetMapping(value = {"/subs/add"})
     public String showAddSub(Model model, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
-        model.addAttribute("client", client);
-        model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
 
-        Subscription subscription = new Subscription();
+        if (!rightService.isUserAdmin(session, model)) {
+            return "forbbiden";
+        } else {
+            Subscription subscription = new Subscription();
 
-        model.addAttribute("add", true);
-        model.addAttribute("sub", subscription);
-
-        return "subscription-edit";
+            model.addAttribute("add", true);
+            model.addAttribute("sub", subscription);
+            return "subscription-edit";
+        }
     }
 
     @PostMapping(value = "/subs/add")
     public String addSubscription(Model model,
                                   @ModelAttribute("sub") Subscription subscription, HttpSession session) {
         try {
-            subscriptionService.save(subscription);
+            if (!rightService.isUserAdmin(session, model)) {
+                return "forbbiden";
+            } else {
+                subscriptionService.save(subscription);
+                List<Subscription> subscriptions = subscriptionService.getAllSubs();
 
-            String login = (String) session.getAttribute("login");
-            Client client = clientService.getClientByLogin(login);
-            model.addAttribute("client", client);
-            model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
-
-            List<Subscription> subscriptions = subscriptionService.getAllSubs();
-
-            model.addAttribute("subs", subscriptions);
-            return "subscriptions";
+                model.addAttribute("subs", subscriptions);
+                return "subscriptions";
+            }
         } catch (Exception ex) {
 //todo рефакторинг
             String errorMessage = ex.getMessage();
@@ -82,17 +74,16 @@ public class AdminSubscriptionController {
 
     @GetMapping(value = {"/subs/{subId}/edit"})
     public String showEditSub(Model model, @PathVariable long subId, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
-        model.addAttribute("client", client);
-        model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
+        if (!rightService.isUserAdmin(session, model)) {
+            return "forbbiden";
+        } else {
+            Subscription subscription;
+            subscription = subscriptionService.getById(subId);
 
-        Subscription subscription;
-        subscription = subscriptionService.getById(subId);
-
-        model.addAttribute("add", false);
-        model.addAttribute("sub", subscription);
-        return "subscription-edit";
+            model.addAttribute("add", false);
+            model.addAttribute("sub", subscription);
+            return "subscription-edit";
+        }
     }
 
     @PostMapping(value = {"/subs/{subId}/edit"})
@@ -100,18 +91,17 @@ public class AdminSubscriptionController {
                             @PathVariable long subId,
                             @ModelAttribute("sub") Subscription subscription, HttpSession session) {
         try {
-            String login = (String) session.getAttribute("login");
-            Client client = clientService.getClientByLogin(login);
-            model.addAttribute("client", client);
-            model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
+            if (!rightService.isUserAdmin(session, model)) {
+                return "forbbiden";
+            } else {
+                subscription.setId(subId);
+                subscriptionService.update(subscription);
 
-            subscription.setId(subId);
-            subscriptionService.update(subscription);
+                List<Subscription> subscriptions = subscriptionService.getAllSubs();
 
-            List<Subscription> subscriptions = subscriptionService.getAllSubs();
-
-            model.addAttribute("subs", subscriptions);
-            return "subscriptions";
+                model.addAttribute("subs", subscriptions);
+                return "subscriptions";
+            }
         } catch (Exception ex) {
 //todo рефакторинг
             String errorMessage = ex.getMessage();
@@ -124,16 +114,15 @@ public class AdminSubscriptionController {
 
     @GetMapping(value = {"/subs/{subId}/delete"})
     public String deleteSub(Model model, @PathVariable long subId, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
-        model.addAttribute("client", client);
-        model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
+        if (!rightService.isUserAdmin(session, model)) {
+            return "forbbiden";
+        } else {
+            subscriptionService.delete(subId);
 
-        subscriptionService.delete(subId);
+            List<Subscription> subscriptions = subscriptionService.getAllSubs();
 
-        List<Subscription> subscriptions = subscriptionService.getAllSubs();
-
-        model.addAttribute("subs", subscriptions);
-        return "subscriptions";
+            model.addAttribute("subs", subscriptions);
+            return "subscriptions";
+        }
     }
 }

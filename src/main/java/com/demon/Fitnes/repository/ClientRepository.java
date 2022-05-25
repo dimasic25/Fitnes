@@ -92,4 +92,20 @@ public class ClientRepository {
 
         return (String) keyHolder.getKeys().get("login");
     }
+
+    public Optional<Client> findAdminByLogin(String login) {
+        final String sql = """
+                SELECT client.client_login, client_password
+                FROM client
+                INNER JOIN admin
+                ON client.client_login = admin.client_login
+                WHERE admin.client_login = :login;
+                """;
+
+        var params = new MapSqlParameterSource()
+                .addValue("login", login);
+
+        return jdbcTemplate.query(sql, params, ClientMapper.MAPPER1)
+                .stream().findAny();
+    }
 }

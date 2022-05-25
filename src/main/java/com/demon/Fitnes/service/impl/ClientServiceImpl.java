@@ -4,6 +4,7 @@ import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.repository.ClientRepository;
 import com.demon.Fitnes.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,16 +13,25 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public ClientServiceImpl(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Override
     public Client verifyClient(Client client) throws Exception {
-        if (clientRepository.findByLoginAndPassword(client).isPresent()) {
-            return client;
+        boolean isUserPresent = clientRepository.findByLogin(client.getLogin()).isPresent();
+
+        if (isUserPresent) {
+            Client dbClient = clientRepository.findByLogin(client.getLogin()).get();
+            if (passwordEncoder.matches(client.getPassword(), dbClient.getPassword())) {
+                return client;
+            } else {
+                throw new Exception("Введен неверный пароль!");
+            }
         } else {
             throw new Exception("Клиента с таким логином не существует!");
         }
@@ -39,6 +49,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public String registerClient(Client client) throws Exception {
+        String hashPassword = passwordEncoder.encode(client.getPassword());
+        client.setPassword(hashPassword);
         return clientRepository.insert(client);
     }
 }

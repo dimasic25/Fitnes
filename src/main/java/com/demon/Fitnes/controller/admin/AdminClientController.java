@@ -2,6 +2,7 @@ package com.demon.Fitnes.controller.admin;
 
 import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.service.ClientService;
+import com.demon.Fitnes.service.RightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,21 +17,22 @@ import java.util.List;
 public class AdminClientController {
 
     private final ClientService clientService;
+    private final RightService rightService;
 
     @Autowired
-    public AdminClientController(ClientService clientService) {
+    public AdminClientController(ClientService clientService, RightService rightService) {
         this.clientService = clientService;
+        this.rightService = rightService;
     }
 
     @GetMapping("/clients")
     public String getAllClients(Model model, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
-        model.addAttribute("client", client);
-        model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
-
-        List<Client> clients = clientService.getAllClients();
-        model.addAttribute("clients", clients);
-        return "clients";
+        if (!rightService.isUserAdmin(session, model)) {
+            return "forbbiden";
+        } else {
+            List<Client> clients = clientService.getAllClients();
+            model.addAttribute("clients", clients);
+            return "clients";
+        }
     }
 }

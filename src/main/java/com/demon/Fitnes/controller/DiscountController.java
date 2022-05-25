@@ -1,10 +1,8 @@
 package com.demon.Fitnes.controller;
 
-import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.model.Discount;
-import com.demon.Fitnes.model.ServiceSubscription;
-import com.demon.Fitnes.service.ClientService;
 import com.demon.Fitnes.service.DiscountService;
+import com.demon.Fitnes.service.RightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,23 +17,24 @@ import java.util.List;
 public class DiscountController {
 
     private final DiscountService discountService;
-    private final ClientService clientService;
+    private final RightService rightService;
 
     @Autowired
-    public DiscountController(DiscountService discountService, ClientService clientService) {
+    public DiscountController(DiscountService discountService, RightService rightService) {
         this.discountService = discountService;
-        this.clientService = clientService;
+        this.rightService = rightService;
     }
 
     @GetMapping
     public String showClientDiscounts(Model model, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
+        if (!rightService.isUserAuthored(session, model)) {
+            return "forbbiden";
+        } else {
+            String login = (String) session.getAttribute("login");
+            List<Discount> discounts = discountService.getDiscountsByClient(login);
 
-        List<Discount> discounts = discountService.getDiscountsByClient(login);
-
-        model.addAttribute("client", client);
-        model.addAttribute("discounts", discounts);
-        return "discounts";
+            model.addAttribute("discounts", discounts);
+            return "discounts";
+        }
     }
 }

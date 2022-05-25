@@ -1,8 +1,7 @@
 package com.demon.Fitnes.controller;
 
-import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.model.Service;
-import com.demon.Fitnes.service.ClientService;
+import com.demon.Fitnes.service.RightService;
 import com.demon.Fitnes.service.ServService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,22 +17,22 @@ import java.util.List;
 public class ServiceController {
 
     private final ServService servService;
-    private final ClientService clientService;
+    private final RightService rightService;
 
     @Autowired
-    public ServiceController(ServService servService, ClientService clientService) {
+    public ServiceController(ServService servService, RightService rightService) {
         this.servService = servService;
-        this.clientService = clientService;
+        this.rightService = rightService;
     }
 
     @GetMapping
     public String showAllServices(Model model, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
-        List<Service> serviceList = servService.getServices();
-
-        model.addAttribute("client", client);
-        model.addAttribute("services", serviceList);
-        return "services";
+        if (!rightService.isUserAuthored(session, model)) {
+            return "forbbiden";
+        } else {
+            List<Service> serviceList = servService.getServices();
+            model.addAttribute("services", serviceList);
+            return "services";
+        }
     }
 }

@@ -1,9 +1,8 @@
 package com.demon.Fitnes.controller;
 
-import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.model.Coach;
-import com.demon.Fitnes.service.ClientService;
 import com.demon.Fitnes.service.CoachService;
+import com.demon.Fitnes.service.RightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,23 +17,22 @@ import java.util.List;
 public class CoachController {
 
     private final CoachService coachService;
-    private final ClientService clientService;
+    private final RightService rightService;
 
     @Autowired
-    public CoachController(CoachService coachService, ClientService clientService) {
+    public CoachController(CoachService coachService, RightService rightService) {
         this.coachService = coachService;
-        this.clientService = clientService;
+        this.rightService = rightService;
     }
 
     @GetMapping
     public String showCoachesPage(Model model, HttpSession session) {
-        String login = (String) session.getAttribute("login");
-        Client client = clientService.getClientByLogin(login);
-
-        List<Coach> coaches = coachService.getCoaches();
-
-        model.addAttribute("client", client);
-        model.addAttribute("coaches", coaches);
-        return "coaches";
+        if (!rightService.isUserAuthored(session, model)) {
+            return "forbbiden";
+        } else {
+            List<Coach> coaches = coachService.getCoaches();
+            model.addAttribute("coaches", coaches);
+            return "coaches";
+        }
     }
 }
