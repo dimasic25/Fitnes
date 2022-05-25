@@ -34,6 +34,19 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
+
+    public List<Discount> getClientDiscounts() {
+        List<Discount> discounts = discountRepository.findClientDiscounts();
+
+        for (Discount discount:
+                discounts) {
+            Service service =  serviceRepository.findById(discount.getService().getId()).get();
+            discount.setService(service);
+        }
+        return discounts;
+    }
+
+    @Override
     public List<Discount> getDiscountsByClient(String clientLogin) {
         List<Discount> discounts = discountRepository.findDiscountsByClient(clientLogin);
 
@@ -43,5 +56,19 @@ public class DiscountServiceImpl implements DiscountService {
             discount.setService(service);
         }
         return discounts;
+    }
+
+    @Override
+    public void save(Discount discount) throws Exception {
+        if (discountRepository.existsDiscount(discount.getClientLogin(), discount.getId()) == null) {
+            discountRepository.insert(discount);
+        } else {
+            throw new Exception("Клиент уже имеет данную скидку!");
+        }
+    }
+
+    @Override
+    public void delete(String login, Long id) {
+        discountRepository.delete(login, id);
     }
 }

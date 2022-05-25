@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div th:replace="~{fragments/nav-panel::nav-panel(${client})}"></div>
+<div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
 
 
 <div class="container mt-4">
@@ -36,7 +36,6 @@
                     <th scope="col">Дата рождения</th>
                     <th scope="col">Опыт работы (количество лет)</th>
                     <th scope="col">Телефон</th>
-                    <th scope="col">Действия</th>
                 </tr>
                 <tr th:each ="coach : ${coaches}">
                     <td th:utext="${coach.login}">...</td>
@@ -46,7 +45,6 @@
                     <td th:utext="${coach.birthdate}">...</td>
                     <td th:utext="${coach.experience}">...</td>
                     <td th:utext="${coach.phone}">...</td>
-                    <td><a th:href="@{/admin/coaches/{coachLogin}/delete(coachLogin=${coach.login})}">Удалить</a></td>
                 </tr>
             </table>
         </div>

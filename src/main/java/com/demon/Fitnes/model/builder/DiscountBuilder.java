@@ -8,6 +8,7 @@ public final class DiscountBuilder {
     private Service service;
     private Integer amount;
     private Integer numberVisits;
+    private String clientLogin;
 
     private DiscountBuilder() {
     }
@@ -36,12 +37,18 @@ public final class DiscountBuilder {
         return this;
     }
 
+    public DiscountBuilder clientLogin(String clientLogin) {
+        this.clientLogin = clientLogin;
+        return this;
+    }
+
     public Discount build() {
         Discount discount = new Discount();
         discount.setId(id);
         discount.setService(service);
         discount.setAmount(amount);
         discount.setNumberVisits(numberVisits);
+        discount.setClientLogin(clientLogin);
         return discount;
     }
 }

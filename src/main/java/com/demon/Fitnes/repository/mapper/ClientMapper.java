@@ -13,6 +13,7 @@ public class ClientMapper {
                     .lastName(rs.getString("client_second_name"))
                     .middleName(rs.getString("client_middle_name"))
                     .birthdate(rs.getDate("client_birthday"))
+                    .phone(rs.getString("client_phone"))
                     .build();
 
     public static final RowMapper<Client> MAPPER1 = (rs, rowNum) ->

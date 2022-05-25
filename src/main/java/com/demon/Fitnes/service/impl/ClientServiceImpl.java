@@ -53,4 +53,9 @@ public class ClientServiceImpl implements ClientService {
         client.setPassword(hashPassword);
         return clientRepository.insert(client);
     }
+
+    @Override
+    public void deleteUser(String login) {
+        clientRepository.deleteClient(login);
+    }
 }

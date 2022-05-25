@@ -12,4 +12,6 @@ public interface ClientService {
     Client getClientByLogin(String login);
 
     String registerClient(Client client) throws Exception;
+
+    void deleteUser(String login);
 }

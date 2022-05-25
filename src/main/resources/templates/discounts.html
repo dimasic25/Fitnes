@@ -7,10 +7,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div th:replace="~{fragments/nav-panel::nav-panel(${client})}"></div>
+<div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
 
 
 <div class="container mt-4">
+    <div th:unless="${isAdmin}">
     <h1>Ваши скидки</h1>
 
     <div th:if="${discounts.isEmpty()}">
@@ -23,6 +24,29 @@
         </div>
     </div>
     </div>
+<div th:if="${isAdmin}">
+    <h1>Скидки клиентов</h1>
+    <nobr>
+        <a class="btn" th:href="@{/admin/discounts/add}">Добавить скидку</a>
+    </nobr>
+    <br/><br/>
+    <div>
+        <table class="table">
+            <tr>
+                <th scope="col">Клиент</th>
+                <th scope="col">Услуга</th>
+                <th scope="col">Размер</th>
+                <th scope="col">Действия</th>
+            </tr>
+            <tr th:each ="discount : ${discounts}">
+                <td th:utext="${discount.clientLogin}">...</td>
+                <td th:utext="${discount.service.name}">...</td>
+                <td th:utext="${discount.amount} + ' %'">...</td>
+                <td><a class="text-danger" th:href="'/admin/discounts/' + ${discount.clientLogin} + '/' + ${discount.id} + '/delete'">Удалить</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

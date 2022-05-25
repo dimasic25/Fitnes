@@ -6,6 +6,7 @@ import lombok.Data;
 public class Discount {
 
     private Long id;
+    private String clientLogin;
     private Service service;
     private Integer amount;
     private Integer numberVisits;

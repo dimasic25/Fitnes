@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div th:replace="~{fragments/nav-panel::nav-panel(${client})}"></div>
+<div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
 
 
 <div class="container mt-4">

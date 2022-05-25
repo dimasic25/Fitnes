@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/subs")
 public class AdminSubscriptionController {
 
     private final SubscriptionService subscriptionService;
@@ -24,7 +24,7 @@ public class AdminSubscriptionController {
         this.rightService = rightService;
     }
 
-    @GetMapping("/subs")
+    @GetMapping
     public String findAllSubs(Model model, HttpSession session) {
         if (!rightService.isUserAdmin(session, model)) {
             return "forbbiden";
@@ -35,7 +35,7 @@ public class AdminSubscriptionController {
         }
     }
 
-    @GetMapping(value = {"/subs/add"})
+    @GetMapping(value = {"/add"})
     public String showAddSub(Model model, HttpSession session) {
 
         if (!rightService.isUserAdmin(session, model)) {
@@ -45,11 +45,11 @@ public class AdminSubscriptionController {
 
             model.addAttribute("add", true);
             model.addAttribute("sub", subscription);
-            return "subscription-edit";
+            return "subscription-form";
         }
     }
 
-    @PostMapping(value = "/subs/add")
+    @PostMapping(value = "/add")
     public String addSubscription(Model model,
                                   @ModelAttribute("sub") Subscription subscription, HttpSession session) {
         try {
@@ -68,11 +68,11 @@ public class AdminSubscriptionController {
             model.addAttribute("errorMessage", errorMessage);
 
             model.addAttribute("add", true);
-            return "subscription-edit";
+            return "subscription-form";
         }
     }
 
-    @GetMapping(value = {"/subs/{subId}/edit"})
+    @GetMapping(value = {"/{subId}/edit"})
     public String showEditSub(Model model, @PathVariable long subId, HttpSession session) {
         if (!rightService.isUserAdmin(session, model)) {
             return "forbbiden";
@@ -82,11 +82,11 @@ public class AdminSubscriptionController {
 
             model.addAttribute("add", false);
             model.addAttribute("sub", subscription);
-            return "subscription-edit";
+            return "subscription-form";
         }
     }
 
-    @PostMapping(value = {"/subs/{subId}/edit"})
+    @PostMapping(value = {"/{subId}/edit"})
     public String updateSub(Model model,
                             @PathVariable long subId,
                             @ModelAttribute("sub") Subscription subscription, HttpSession session) {
@@ -108,21 +108,18 @@ public class AdminSubscriptionController {
             model.addAttribute("errorMessage", errorMessage);
 
             model.addAttribute("add", false);
-            return "subscription-edit";
+            return "subscription-form";
         }
     }
 
-    @GetMapping(value = {"/subs/{subId}/delete"})
+    @GetMapping(value = {"/{subId}/delete"})
     public String deleteSub(Model model, @PathVariable long subId, HttpSession session) {
         if (!rightService.isUserAdmin(session, model)) {
             return "forbbiden";
         } else {
             subscriptionService.delete(subId);
 
-            List<Subscription> subscriptions = subscriptionService.getAllSubs();
-
-            model.addAttribute("subs", subscriptions);
-            return "subscriptions";
+            return "redirect:/admin/subs";
         }
     }
 }

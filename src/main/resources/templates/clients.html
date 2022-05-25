@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <title>Contact List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div th:replace="~{fragments/nav-panel::nav-panel(${client})}"></div>
+<div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
 
+<div class="container mt-4">
 <div th:if="${isAdmin}">
     <div>
         <table class="table">
@@ -18,7 +20,6 @@
                 <th scope="col">Отчество</th>
                 <th scope="col">Дата рождения</th>
                 <th scope="col">Телефон</th>
-                <th scope="col">Действия</th>
             </tr>
             <tr th:each ="client : ${clients}">
                 <td th:utext="${client.login}">...</td>
@@ -27,10 +28,10 @@
                 <td th:utext="${client.middleName}">...</td>
                 <td th:utext="${client.birthdate}">...</td>
                 <td th:utext="${client.phone}">...</td>
-                <td><a th:href="@{/admin/clients/{clientLogin}/delete(clientLogin=${client.login})}">Удалить</a></td>
             </tr>
         </table>
     </div>
+</div>
 </div>
 </body>
 </html>
