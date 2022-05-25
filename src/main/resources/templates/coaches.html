@@ -12,7 +12,7 @@
 
 <div class="container mt-4">
     <h1>Тренеры</h1>
-
+    <div th:unless="${isAdmin}">
     <div th:if="${coaches.isEmpty()}">
         <h2>Тренеров нет!</h2>
     </div>
@@ -22,7 +22,35 @@
             <div th:replace="~{fragments/coach-card::coach-card(${coach})}"></div>
         </div>
     </div>
-</div>
+
+    </div>
+
+    <div th:if="${isAdmin}">
+        <div>
+            <table class="table">
+                <tr>
+                    <th scope="col">Логин тренера</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Отчество</th>
+                    <th scope="col">Дата рождения</th>
+                    <th scope="col">Опыт работы (количество лет)</th>
+                    <th scope="col">Телефон</th>
+                    <th scope="col">Действия</th>
+                </tr>
+                <tr th:each ="coach : ${coaches}">
+                    <td th:utext="${coach.login}">...</td>
+                    <td th:utext="${coach.firstName}">...</td>
+                    <td th:utext="${coach.secondName}">...</td>
+                    <td th:utext="${coach.middleName}">...</td>
+                    <td th:utext="${coach.birthdate}">...</td>
+                    <td th:utext="${coach.experience}">...</td>
+                    <td th:utext="${coach.phone}">...</td>
+                    <td><a th:href="@{/admin/coaches/{coachLogin}/delete(coachLogin=${coach.login})}">Удалить</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

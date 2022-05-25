@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Contact List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav-panel::nav-panel(${client})}"></div>
+
+<div th:if="${isAdmin}">
+    <div>
+        <table class="table">
+            <tr>
+                <th scope="col">Логин клиента</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Дата рождения</th>
+                <th scope="col">Телефон</th>
+                <th scope="col">Действия</th>
+            </tr>
+            <tr th:each ="client : ${clients}">
+                <td th:utext="${client.login}">...</td>
+                <td th:utext="${client.firstName}">...</td>
+                <td th:utext="${client.lastName}">...</td>
+                <td th:utext="${client.middleName}">...</td>
+                <td th:utext="${client.birthdate}">...</td>
+                <td th:utext="${client.phone}">...</td>
+                <td><a th:href="@{/admin/clients/{clientLogin}/delete(clientLogin=${client.login})}">Удалить</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

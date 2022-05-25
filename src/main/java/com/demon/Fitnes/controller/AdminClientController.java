@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,9 +23,14 @@ public class AdminClientController {
     }
 
     @GetMapping("/clients")
-    public String getAllClients(Model model) {
+    public String getAllClients(Model model, HttpSession session) {
+        String login = (String) session.getAttribute("login");
+        Client client = clientService.getClientByLogin(login);
+        model.addAttribute("client", client);
+        model.addAttribute("isAdmin", session.getAttribute("isAdmin"));
+
         List<Client> clients = clientService.getAllClients();
         model.addAttribute("clients", clients);
-        return "clients-list";
+        return "clients";
     }
 }
