@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ScheduleService {
     List<Schedule> getSllSchedules();
+
+    List<Schedule> getClientShedules(String clientLogin);
 }

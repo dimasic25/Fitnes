@@ -7,12 +7,11 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 </head>
 <body>
+<div class="wrapper">
 <div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
 
-<div class="container mt-4">
+<main class="container main mt-4">
 <h1 th:text="${add} ? 'Создать абонемент' : 'Изменить абонемент'"></h1>
-<a th:href="@{/admin/subs}">Назад</a>
-<br/><br/>
 <form th:action="${add} ? @{/admin/subs/add} : @{/admin/subs/{subId}/edit(subId=${sub.id})}"
       th:object="${sub}" method="POST">
 
@@ -28,21 +27,27 @@
     <label for="endDate" class="form-label">Дата окончания</label>
     <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
   </div>
-  <div class="mb-3">
-    <label for="price" class="form-label">Цена абонемента</label>
-    <input type="text" class="form-control" id="price" th:field="*{price}">
-  </div>
   <div class="mb-3" th:unless="${add}">
-    <label for="closed" class="form-label">Закрыть?</label>
-    <input type="text" class="form-control" id="closed" th:field="*{closed}">
+    <div class="form-check">
+      <label class="form-check-label" for="closed">
+        Закрыть?
+      </label>
+      <input class="form-check-input" type="checkbox" id="closed" th:field="*{closed}">
+    </div>
   </div>
 
+  <div class="btn-group">
   <input class="btn" type="submit" th:value="${add} ? 'Создать' : 'Обновить'" />
+  <a class="btn" th:href="@{/admin/subs}">Назад</a>
+  </div>
 </form>
 
 <br/>
 
 <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"></div>
+</main>
+
+  <div th:replace="fragments/footer"></div>
 </div>
 </body>
 </html>

@@ -1,0 +1,10 @@
+<div class="card mb-3" th:fragment="schedule-card(schedule)">
+    <div class="card-body ">
+        <div th:text="'Услуга: ' + ${schedule.service.name}"></div>
+        <div th:text="'Начало занятий: ' + ${schedule.startTime}"></div>
+        <div th:text="'Конец занятий: ' + ${schedule.endTime}"></div>
+        <div th:if="${schedule.coach}" th:text="'Тренер: ' + ${schedule.coach.firstName} + ' ' + ${schedule.coach.middleName} + ' ' + ${schedule.coach.secondName}"></div>
+        <div th:text="'День недели: ' + ${schedule.weekday}"></div>
+        <div th:text="'Группа: ' + ${schedule.groupNumber}"></div>
+    </div>
+</div>

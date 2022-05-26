@@ -7,10 +7,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 </head>
 <body>
+<div class="wrapper">
 <div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
 
 
-<div class="container mt-4">
+<main class="container main mt-4">
     <h1>Услуги абонемента</h1>
 
     <div th:if="${services.isEmpty()}">
@@ -23,6 +24,9 @@
         </div>
     </div>
 
+</main>
+
+    <div th:replace="fragments/footer"></div>
 </div>
 </body>
 </html>

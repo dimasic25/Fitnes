@@ -81,4 +81,11 @@ public class MainController {
             return "register";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("client");
+        session.removeAttribute("isAdmin");
+        return "redirect:/";
+    }
 }

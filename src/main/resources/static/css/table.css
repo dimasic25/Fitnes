@@ -1,0 +1,28 @@
+.table{
+    border-collapse: collapse;
+    border: 1px solid yellow;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: yellow;
+}
+.table th {
+    font-weight: bold;
+    padding: 5px;
+    border: 1px solid yellow;
+}
+.table td{
+    padding: 5px 10px;
+    border: 1px solid yellow;
+    text-align: left;
+}
+td > a {
+    color: yellow;
+    text-decoration: none;
+}
+
+td > a:hover {
+    color: yellow;
+    text-decoration-line: underline;
+    transition: width 0.3s ease-out;
+}

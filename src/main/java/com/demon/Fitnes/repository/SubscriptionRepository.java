@@ -36,7 +36,7 @@ public class SubscriptionRepository {
         final String sql = """
                 SELECT subscription_id, client_login, start_date, end_date, closed, subscription_price
                 FROM subscription
-                WHERE client_login = :login
+                WHERE client_login = :login and closed = false 
                 ORDER BY client_login, end_date DESC;
                 """;
 

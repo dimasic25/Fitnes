@@ -1,11 +1,11 @@
-<div th:fragment="nav-panel(client, isAdmin)">
-<ul class="nav nav-tabs justify-content-center bg-dark">
+<header th:fragment="nav-panel(client, isAdmin)">
+<ul class="nav nav-pills justify-content-center">
 
     <li class="nav-item">
-        <a class="nav-link active" th:unless="${isAdmin}" href="/subs">Абонементы</a>
+        <a class="nav-link" th:unless="${isAdmin}" href="/subs">Абонементы</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" th:if="${isAdmin}"  href="/admin/subs">Абонементы</a>
+        <a class="nav-link" th:if="${isAdmin}"  href="/admin/subs">Абонементы</a>
     </li>
 
     <li class="nav-item" th:if="${isAdmin}">
@@ -25,13 +25,18 @@
     <li class="nav-item">
         <a class="nav-link" href="/coaches">Тренеры</a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/schedule">Расписание занятий</a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link disabled text-info" tabindex="-1" aria-disabled="true" th:text="'Здравствуйте, ' + ${client.login}"></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="/">Выйти из аккаунта</a>
+        <a class="nav-link" href="/logout">Выйти из аккаунта</a>
     </li>
 </ul>
 
-</div>
+</header>
