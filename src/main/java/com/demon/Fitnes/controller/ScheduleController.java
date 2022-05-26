@@ -30,7 +30,7 @@ public class ScheduleController {
         if (!rightService.isUserAuthored(session, model)) {
             return "forbbiden";
         } else {
-            List<Schedule> schedules = scheduleService.getClientShedules((String) session.getAttribute("login"));
+            List<Schedule> schedules = scheduleService.getClientSchedules((String) session.getAttribute("login"));
             model.addAttribute("schedules", schedules);
             return "schedules";
         }

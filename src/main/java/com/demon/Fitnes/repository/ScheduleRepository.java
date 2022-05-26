@@ -41,4 +41,26 @@ public class ScheduleRepository {
 
         return jdbcTemplate.query(sql, params, new ScheduleMapper());
     }
+
+    public List<Integer> findAllGroupNumbers() {
+        final String sql = """
+                    SELECT DISTINCT schedule_group_number
+                    FROM schedule sc;               
+                    """;
+
+        return jdbcTemplate.queryForList(sql, new MapSqlParameterSource(), Integer.class);
+    }
+
+    public List<Integer> findGroupNumbersByService(Long serviceId) {
+        final String sql = """
+                    SELECT DISTINCT schedule_group_number
+                    FROM schedule sc
+                    WHERE service_id = :serviceId;               
+                    """;
+
+        var params = new MapSqlParameterSource()
+                .addValue("serviceId", serviceId);
+
+        return jdbcTemplate.queryForList(sql, params, Integer.class);
+    }
 }

@@ -2,6 +2,7 @@ package com.demon.Fitnes.service.impl;
 
 import com.demon.Fitnes.model.Service;
 import com.demon.Fitnes.model.ServiceSubscription;
+import com.demon.Fitnes.repository.ScheduleRepository;
 import com.demon.Fitnes.repository.ServiceRepository;
 import com.demon.Fitnes.repository.ServiceSubscriptionRepository;
 import com.demon.Fitnes.service.ServiceSubsriptionService;
@@ -14,11 +15,13 @@ public class ServiceSubscriptionServiceImpl implements ServiceSubsriptionService
 
     private final ServiceSubscriptionRepository serviceSubscriptionRepository;
     private final ServiceRepository serviceRepository;
+    private final ScheduleRepository scheduleRepository;
 
     @Autowired
-    public ServiceSubscriptionServiceImpl(ServiceSubscriptionRepository serviceSubscriptionRepository, ServiceRepository serviceRepository) {
+    public ServiceSubscriptionServiceImpl(ServiceSubscriptionRepository serviceSubscriptionRepository, ServiceRepository serviceRepository, ScheduleRepository scheduleRepository) {
         this.serviceSubscriptionRepository = serviceSubscriptionRepository;
         this.serviceRepository = serviceRepository;
+        this.scheduleRepository = scheduleRepository;
     }
 
     @Override
@@ -31,5 +34,37 @@ public class ServiceSubscriptionServiceImpl implements ServiceSubsriptionService
         }
 
         return serviceSubscriptions;
+    }
+
+    @Override
+    public ServiceSubscription getServiceSub(Long subId, Long serviceId) {
+        ServiceSubscription serviceSubscription = serviceSubscriptionRepository.findByServiceAndSubscription(serviceId, subId).orElse(null);
+
+        return serviceSubscription;
+    }
+
+    @Override
+    public void save(ServiceSubscription serviceSubscription) throws Exception {
+        List<Integer> groupNumbers = scheduleRepository.findGroupNumbersByService(serviceSubscription.getService().getId());
+        if (groupNumbers.contains(serviceSubscription.getGroupNumber())) {
+            serviceSubscriptionRepository.insert(serviceSubscription);
+        } else {
+            throw new Exception("Группа в данный момент недоступна! Выберите другую!");
+        }
+    }
+
+    @Override
+    public void update(ServiceSubscription serviceSubscription) throws Exception {
+        List<Integer> groupNumbers = scheduleRepository.findGroupNumbersByService(serviceSubscription.getService().getId());
+        if (groupNumbers.contains(serviceSubscription.getGroupNumber())) {
+            serviceSubscriptionRepository.update(serviceSubscription);
+        } else {
+            throw new Exception("Группа в данный момент недоступна! Выберите другую!");
+        }
+    }
+
+    @Override
+    public void delete(Long serviceId, Long subscriptionId) {
+        serviceSubscriptionRepository.delete(serviceId, subscriptionId);
     }
 }

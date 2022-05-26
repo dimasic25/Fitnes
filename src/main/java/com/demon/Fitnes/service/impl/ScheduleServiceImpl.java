@@ -42,7 +42,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> getClientShedules(String clientLogin) {
+    public List<Schedule> getClientSchedules(String clientLogin) {
         List<Schedule> clientSchedules = scheduleRepository.findClientSchedules(clientLogin);
 
         if (clientSchedules.isEmpty()) {
@@ -59,6 +59,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
 
         return clientSchedules;
+    }
+
+    @Override
+    public List<Integer> getGroupNumbers() {
+        return scheduleRepository.findAllGroupNumbers();
     }
 
 }
