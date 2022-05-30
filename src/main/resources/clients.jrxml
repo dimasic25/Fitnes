@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clients1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40a0e173-1427-4ae1-ae55-05223131af1b">
+<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+<field name="login" class="java.lang.String">
+</field>
+<field name="firstName" class="java.lang.String">
+</field>
+<field name="middleName" class="java.lang.String">
+</field>
+<field name="lastName" class="java.lang.String">
+</field>
+<field name="phone" class="java.lang.String">
+</field>
+<field name="countSubscriptions" class="java.lang.Integer">
+</field>
+<background>
+    <band/>
+</background>
+<title>
+    <band height="72">
+        <frame>
+            <reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="e589f438-43ba-4caa-887f-1cf2d627a2f6"/>
+            <staticText>
+                <reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="8f675b90-2ae0-43ad-9b2e-ef64efd1f2be"/>
+                <textElement>
+                    <font size="34" fontName="Tahoma" pdfEncoding="Cp1251" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Клиенты]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="392" y="63" width="180" height="20" forecolor="#FFFFFF" uuid="d0a2f0eb-6a68-404a-8bca-607b922d1750"/>
+                <textElement textAlignment="Right">
+                    <font size="14" fontName="Tahoma" pdfEncoding="Cp1251" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Самые активные клиенты]]></text>
+            </staticText>
+        </frame>
+    </band>
+</title>
+<pageHeader>
+    <band height="13"/>
+</pageHeader>
+<columnHeader>
+    <band height="21">
+        <line>
+            <reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="6df29c96-6fa4-48f9-b625-86744146f286"/>
+        </line>
+        <staticText>
+            <reportElement mode="Opaque" x="0" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="32977ab5-ed30-48bd-947f-ce0e9a5d01b0">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="19caa71b-34ee-4a90-9495-fb8a8f88f777"/>
+            </reportElement>
+            <textElement textAlignment="Center">
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Логин]]></text>
+        </staticText>
+        <staticText>
+            <reportElement mode="Opaque" x="92" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="154cc635-3727-4687-a0a9-223ea3ee4a25">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0d572525-49ab-48d2-a1d0-1305ae2348df"/>
+            </reportElement>
+            <textElement textAlignment="Center">
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Имя]]></text>
+        </staticText>
+        <staticText>
+            <reportElement mode="Opaque" x="184" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="12dea669-3e83-4781-8c45-404c6e0c5496">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="918582f5-74a4-4b92-8f82-1e2ee3caed4f"/>
+            </reportElement>
+            <textElement textAlignment="Center">
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Фамилия]]></text>
+        </staticText>
+        <staticText>
+            <reportElement mode="Opaque" x="276" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="48178e57-8888-4520-a332-382ced728b24">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7292d4ec-2862-4c60-b13c-3604f3e89ef8"/>
+            </reportElement>
+            <textElement textAlignment="Center">
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Отчество]]></text>
+        </staticText>
+        <staticText>
+            <reportElement mode="Opaque" x="368" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="89dde8a9-dd31-457b-a959-fcd4f29bc409">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3141a348-05bd-42eb-847f-9d1c2fbb6649"/>
+            </reportElement>
+            <textElement textAlignment="Center">
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Телефон]]></text>
+        </staticText>
+        <staticText>
+            <reportElement mode="Opaque" x="460" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="37341764-fb5a-4f9e-8f44-b995c2fd3d59">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="70cd847a-bc2e-46c5-abd2-813981282623"/>
+            </reportElement>
+            <textElement textAlignment="Center">
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Абонементы]]></text>
+        </staticText>
+    </band>
+</columnHeader>
+<detail>
+    <band height="20">
+        <line>
+            <reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="a994bc33-aed0-4961-b7c1-2d415d71b9f2"/>
+        </line>
+        <textField textAdjust="StretchHeight">
+            <reportElement x="0" y="0" width="92" height="20" uuid="9a70edf6-7e86-4926-9828-64aff000fd2f">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="19caa71b-34ee-4a90-9495-fb8a8f88f777"/>
+            </reportElement>
+            <textElement>
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+        </textField>
+        <textField textAdjust="StretchHeight">
+            <reportElement x="92" y="0" width="92" height="20" uuid="2e3b9130-5279-4e49-a95f-27433dde6a98">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0d572525-49ab-48d2-a1d0-1305ae2348df"/>
+            </reportElement>
+            <textElement>
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
+        </textField>
+        <textField textAdjust="StretchHeight">
+            <reportElement x="184" y="0" width="92" height="20" uuid="00792113-767a-40c7-8236-f14da7aa7f23">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="918582f5-74a4-4b92-8f82-1e2ee3caed4f"/>
+            </reportElement>
+            <textElement>
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{middleName}]]></textFieldExpression>
+        </textField>
+        <textField textAdjust="StretchHeight">
+            <reportElement x="276" y="0" width="92" height="20" uuid="e3117b98-3143-4239-aeb6-7e7d994a9a6c">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7292d4ec-2862-4c60-b13c-3604f3e89ef8"/>
+            </reportElement>
+            <textElement>
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
+        </textField>
+        <textField textAdjust="StretchHeight">
+            <reportElement x="368" y="0" width="92" height="20" uuid="fd66f795-c10d-4f8e-a982-54fc9b9ec5c8">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3141a348-05bd-42eb-847f-9d1c2fbb6649"/>
+            </reportElement>
+            <textElement>
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+        </textField>
+        <textField textAdjust="StretchHeight">
+            <reportElement x="460" y="0" width="92" height="20" uuid="15648dc4-eed5-4cc0-b09e-724056e9d5b7">
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="70cd847a-bc2e-46c5-abd2-813981282623"/>
+            </reportElement>
+            <textElement textAlignment="Center">
+                <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{countSubscriptions}]]></textFieldExpression>
+        </textField>
+    </band>
+</detail>
+<columnFooter>
+    <band/>
+</columnFooter>
+<pageFooter>
+    <band height="17">
+        <textField>
+            <reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="85186fbc-dfe4-4693-addd-0c313bbe8bb5"/>
+            <textElement textAlignment="Right"/>
+            <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+        </textField>
+        <textField evaluationTime="Report">
+            <reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="714fe99b-5551-4848-8ed6-de78f567ea73"/>
+            <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+        </textField>
+        <textField pattern="EEEEE dd MMMMM yyyy">
+            <reportElement x="0" y="4" width="100" height="13" uuid="cc7d83ae-9bb4-460e-98ba-737b47519f79"/>
+            <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+        </textField>
+    </band>
+</pageFooter>
+<summary>
+    <band/>
+</summary>
+</jasperReport>
+

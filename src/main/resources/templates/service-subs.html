@@ -52,7 +52,7 @@
                     <td>
                         <a th:href="@{'/admin/subs/' + ${subId} + '/services/' + ${subser.service.id} + '/edit'}">Редактировать</a>
                         <span>|</span>
-                        <a th:href="@{'/admin/subs/' + ${subId} + '/services/' + ${subser.service.id} + '/delete'}">Удалить</a>
+                        <a class="text-danger" th:href="@{'/admin/subs/' + ${subId} + '/services/' + ${subser.service.id} + '/delete'}">Удалить</a>
                     </td>
                 </tr>
             </table>

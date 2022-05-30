@@ -51,17 +51,6 @@ public class ClientRepository {
                 .stream().findAny();
     }
 
-//    public List<Client> getAllClients() {
-//        final String sql = """
-//                SELECT c.client_login, c.client_first_name,  c.client_second_name, c.client_middle_name, c.client_birthday,
-//                 count(subscription_id) AS count_sub, sum(subscription_price) AS price from client c
-//                	INNER JOIN subscription s ON s.client_login = c.client_login
-//                	GROUP BY(c.client_login);
-//                """;
-//
-//        return jdbcTemplate.query(sql, ClientMapper.MAPPER);
-//    }
-
     public List<Client> getAllClients() {
         final String sql = """
                 SELECT c.client_login, c.client_first_name,  c.client_second_name, c.client_middle_name, c.client_birthday,

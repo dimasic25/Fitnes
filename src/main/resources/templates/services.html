@@ -14,6 +14,7 @@
 <main class="container main mt-4">
     <h1>Услуги спортзала</h1>
 
+    <div th:unless="${isAdmin}">
     <div th:if="${services.isEmpty()}">
         <h2>Услуги не доступны!</h2>
     </div>
@@ -23,7 +24,24 @@
             <div th:replace="~{fragments/service-card::service-card(${service})}"></div>
         </div>
     </div>
+    </div>
 
+    <div th:if="${isAdmin}">
+        <div>
+            <table class="table">
+                <tr>
+                    <th scope="col">Название услуги</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Место занятий</th>
+                </tr>
+                <tr th:each ="service : ${services}">
+                    <td th:utext="${service.name}">...</td>
+                    <td th:utext="${service.price}">...</td>
+                    <td th:utext="${service.place}">...</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </main>
 
     <div th:replace="fragments/footer"></div>

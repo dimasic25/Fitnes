@@ -25,7 +25,7 @@ public class CoachServiceImpl implements CoachService {
 
     @Override
     public List<Coach> getCoaches() {
-        return coachRepository.findAllClients();
+        return coachRepository.findAllCoaches();
     }
 
     @Override

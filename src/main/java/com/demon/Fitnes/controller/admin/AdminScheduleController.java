@@ -1,8 +1,8 @@
 package com.demon.Fitnes.controller.admin;
 
-import com.demon.Fitnes.model.Service;
+import com.demon.Fitnes.model.Schedule;
 import com.demon.Fitnes.service.RightService;
-import com.demon.Fitnes.service.ServService;
+import com.demon.Fitnes.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,26 +13,26 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/services")
-public class AdminServiceController {
+@RequestMapping("/admin/schedule")
+public class AdminScheduleController {
 
+    private final ScheduleService scheduleService;
     private final RightService rightService;
-    private final ServService servService;
 
     @Autowired
-    public AdminServiceController(RightService rightService, ServService servService) {
+    public AdminScheduleController(ScheduleService scheduleService, RightService rightService) {
+        this.scheduleService = scheduleService;
         this.rightService = rightService;
-        this.servService = servService;
     }
 
     @GetMapping
-    public String findAllSubs(Model model, HttpSession session) {
+    public String getAllSchedules(Model model, HttpSession session) {
         if (!rightService.isUserAdmin(session, model)) {
             return "forbbiden";
         } else {
-            List<Service> services = servService.getServices();
-            model.addAttribute("services", services);
-            return "services";
+            List<Schedule> schedules = scheduleService.getSllSchedules();
+            model.addAttribute("schedules", schedules);
+            return "schedules";
         }
     }
 }

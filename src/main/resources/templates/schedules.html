@@ -12,9 +12,9 @@
 
 
     <main class="container main mt-4">
-        <div th:unless="${isAdmin}">
-            <h1>Расписание занятий</h1>
+        <h1>Расписание занятий</h1>
 
+        <div th:unless="${isAdmin}">
             <div th:if="${schedules.isEmpty()}">
                 <h2>Расписаний нет!</h2>
             </div>
@@ -26,33 +26,28 @@
             </div>
         </div>
 
-<!--        <div th:if="${isAdmin}">-->
-<!--            <nobr>-->
-<!--                <a class="btn" th:href="@{/admin/subs/add}">Добавить абонемент</a>-->
-<!--            </nobr>-->
-<!--            <br/><br/>-->
-<!--            <div>-->
-<!--                <table class="table">-->
-<!--                    <tr>-->
-<!--                        <th scope="col">Логин клиента</th>-->
-<!--                        <th scope="col">Дата начала</th>-->
-<!--                        <th scope="col">Дата окончания</th>-->
-<!--                        <th scope="col">Цена</th>-->
-<!--                        <th scope="col">Закрыт</th>-->
-<!--                        <th scope="col">Действия</th>-->
-<!--                    </tr>-->
-<!--                    <tr th:each ="sub : ${subs}">-->
-<!--                        <td th:utext="${sub.clientLogin}">...</td>-->
-<!--                        <td th:utext="${sub.startDate}">...</td>-->
-<!--                        <td th:utext="${sub.endDate}">...</td>-->
-<!--                        <td th:utext="${sub.price}">...</td>-->
-<!--                        <td th:utext="${sub.closed}">...</td>-->
-<!--                        <td th:unless="${sub.closed}"><a th:href="@{/admin/subs/{subId}/edit(subId=${sub.id})}">Редактировать</a></td>-->
-<!--                        <td th:if="${sub.closed}"><a th:href="@{/admin/subs/{subId}/delete(subId=${sub.id})}">Удалить</a></td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div th:if="${isAdmin}">
+            <div>
+                <table class="table">
+                    <tr>
+                        <th scope="col">Название услуги</th>
+                        <th scope="col">Начало занятий</th>
+                        <th scope="col">Конец занятий</th>
+                        <th scope="col">Тренер</th>
+                        <th scope="col">День недели</th>
+                        <th scope="col">Группа</th>
+                    </tr>
+                    <tr th:each ="schedule : ${schedules}">
+                        <td th:utext="${schedule.service.name}">...</td>
+                        <td th:utext="${schedule.startTime}">...</td>
+                        <td th:utext="${schedule.endTime}">...</td>
+                        <td th:utext="${schedule.coach} ? ${schedule.coach.firstName} + ' ' + ${schedule.coach.middleName} + ' ' + ${schedule.coach.secondName} : 'Тренера нет'">...</td>
+                        <td th:utext="${schedule.weekday}">...</td>
+                        <td th:utext="${schedule.groupNumber}">...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
     </main>
 

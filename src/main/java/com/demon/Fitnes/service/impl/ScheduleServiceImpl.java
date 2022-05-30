@@ -32,7 +32,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         for (Schedule schedule:
              schedules) {
             Service service = serviceRepository.findById(schedule.getService().getId()).get();
-            Coach coach = coachRepository.findByLogin(schedule.getCoach().getLogin()).get();
+            Coach coach = coachRepository.findByLogin(schedule.getCoach().getLogin()).orElse(null);
 
             schedule.setService(service);
             schedule.setCoach(coach);

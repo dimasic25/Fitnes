@@ -31,7 +31,7 @@ public class CoachRepository {
                 .stream().findAny();
     }
 
-    public List<Coach> findAllClients() {
+    public List<Coach> findAllCoaches() {
         final String sql = """
                     SELECT coach_login, coach_first_name, coach_last_name, coach_middle_name, coach_birthdate, coach_phone, coach_experience
                     FROM coach;
