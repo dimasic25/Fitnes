@@ -93,11 +93,11 @@ public class ClientRepository {
 
     public Optional<Client> findAdminByLogin(String login) {
         final String sql = """
-                SELECT client.client_login, client_password
-                FROM client
-                INNER JOIN admin
-                ON client.client_login = admin.client_login
-                WHERE admin.client_login = :login;
+                SELECT C.client_login, client_password
+                FROM client C
+                INNER JOIN admin A
+                ON C.client_login = A.client_login
+                WHERE C.client_login = :login;
                 """;
 
         var params = new MapSqlParameterSource()
