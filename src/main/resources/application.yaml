@@ -1,6 +1,6 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/fitnes
-    username: "postgres"
-    password: "01234567"
+    url:  "URL базы данных"
+    username: "Имя пользователя"
+    password: "Пароль"
