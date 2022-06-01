@@ -36,7 +36,7 @@
                 </tr>
                 <tr th:each ="service : ${services}">
                     <td th:utext="${service.name}">...</td>
-                    <td th:utext="${service.price}">...</td>
+                    <td th:utext="${#numbers.formatDecimal(service.price, 1, 0)}">...</td>
                     <td th:utext="${service.place}">...</td>
                 </tr>
             </table>

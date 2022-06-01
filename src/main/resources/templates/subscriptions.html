@@ -45,7 +45,7 @@
                     <td th:utext="${sub.clientLogin}">...</td>
                     <td th:utext="${sub.startDate}">...</td>
                     <td th:utext="${sub.endDate}">...</td>
-                    <td th:utext="${sub.price}">...</td>
+                    <td th:utext="${#numbers.formatDecimal(sub.price, 1, 0)}">...</td>
                     <td th:utext="${sub.closed} ? 'Закрыт' : 'Открыт'">...</td>
                     <td>
                         <a th:href="@{/admin/subs/{subId}/edit(subId=${sub.id})}">Редактировать</a>

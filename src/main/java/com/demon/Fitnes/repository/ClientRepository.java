@@ -34,7 +34,6 @@ public class ClientRepository {
 
         return jdbcTemplate.query(sql, params, ClientMapper.MAPPER1)
                 .stream().findAny();
-
     }
 
     public Optional<Client> findByLogin(String login) {

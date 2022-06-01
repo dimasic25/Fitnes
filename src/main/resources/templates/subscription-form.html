@@ -17,16 +17,24 @@
 
   <div class="mb-3">
     <label for="clientLogin" class="form-label">Логин клиента</label>
-    <input type="text" class="form-control" id="clientLogin" th:field="*{clientLogin}">
+    <select class="form-select" id="clientLogin" th:field="*{clientLogin}">
+      <th:block th:each="login, state : ${logins}">
+        <option th:if="${state.first}" selected th:value="${login}" th:label="${login}"></option>
+        <option th:unless="${state.first}" th:value="${login}" th:label="${login}"></option>
+      </th:block>
+    </select>
   </div>
+
   <div class="mb-3">
     <label for="startDate" class="form-label">Дата начала</label>
     <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
   </div>
+
   <div class="mb-3">
     <label for="endDate" class="form-label">Дата окончания</label>
     <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
   </div>
+
   <div class="mb-3" th:unless="${add}">
     <div class="form-check">
       <label class="form-check-label" for="closed">

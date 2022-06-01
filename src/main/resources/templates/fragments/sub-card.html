@@ -3,7 +3,7 @@
         <div th:text="'Абонемент №' + ${sub.id}"></div>
         <div th:text="'Дата начала: ' + ${sub.startDate}"></div>
         <div th:text="'Дата окончания: ' + ${sub.endDate}"></div>
-        <div th:text="'Стоимость: ' + ${sub.price}"></div>
+        <div th:text="'Стоимость: ' + ${#numbers.formatDecimal(sub.price, 1, 0)} + ' рублей'"></div>
         <div>
         <a class="btn" th:href="@{'/subs/' + ${sub.id}}">Узнать услуги</a>
         </div>

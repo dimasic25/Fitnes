@@ -1,7 +1,7 @@
 <div class="card mb-3" th:fragment="service-card(service)">
     <div class="card-body ">
         <div th:text="'Название услуги: ' + ${service.name}"></div>
-        <div th:text="'Цена: ' + ${service.price}"></div>
+        <div th:text="'Цена: ' + ${#numbers.formatDecimal(service.price, 1, 0)} + ' рублей'"></div>
         <div th:text="'Место занятий: ' + ${service.place}"></div>
         <div th:if="${service.description}" th:text="'Описание: ' + ${service.description}"></div>
     </div>

@@ -1,5 +1,6 @@
 package com.demon.Fitnes.controller.admin;
 
+import com.demon.Fitnes.model.Client;
 import com.demon.Fitnes.model.Service;
 import com.demon.Fitnes.model.ServiceSubscription;
 import com.demon.Fitnes.model.Subscription;
@@ -10,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin/subs")
@@ -21,14 +24,16 @@ public class AdminSubscriptionController {
     private final ServiceSubsriptionService serviceSubsriptionService;
     private final ServService servService;
     private final ScheduleService scheduleService;
+    private final ClientService clientService;
 
     @Autowired
-    public AdminSubscriptionController(SubscriptionService subscriptionService, RightService rightService, ServiceSubsriptionService serviceSubsriptionService, ServService servService, ScheduleService scheduleService) {
+    public AdminSubscriptionController(SubscriptionService subscriptionService, RightService rightService, ServiceSubsriptionService serviceSubsriptionService, ServService servService, ScheduleService scheduleService, ClientService clientService) {
         this.subscriptionService = subscriptionService;
         this.rightService = rightService;
         this.serviceSubsriptionService = serviceSubsriptionService;
         this.servService = servService;
         this.scheduleService = scheduleService;
+        this.clientService = clientService;
     }
 
     @GetMapping
@@ -50,6 +55,16 @@ public class AdminSubscriptionController {
         } else {
             Subscription subscription = new Subscription();
 
+            Set<String> logins = new HashSet<>();
+
+            List<Client> clients = clientService.getAllClients();
+
+            for (Client client:
+                    clients) {
+                logins.add(client.getLogin());
+            }
+
+            model.addAttribute("logins", logins);
             model.addAttribute("add", true);
             model.addAttribute("sub", subscription);
             return "subscription-form";
@@ -73,6 +88,17 @@ public class AdminSubscriptionController {
             String errorMessage = ex.getMessage();
             model.addAttribute("errorMessage", errorMessage);
 
+            Set<String> logins = new HashSet<>();
+
+            List<Client> clients = clientService.getAllClients();
+
+            for (Client client:
+                    clients) {
+                logins.add(client.getLogin());
+            }
+
+            model.addAttribute("logins", logins);
+
             model.addAttribute("add", true);
             return "subscription-form";
         }
@@ -85,6 +111,17 @@ public class AdminSubscriptionController {
         } else {
             Subscription subscription;
             subscription = subscriptionService.getById(subId);
+
+            Set<String> logins = new HashSet<>();
+
+            List<Client> clients = clientService.getAllClients();
+
+            for (Client client:
+                    clients) {
+                logins.add(client.getLogin());
+            }
+
+            model.addAttribute("logins", logins);
 
             model.addAttribute("add", false);
             model.addAttribute("sub", subscription);
@@ -111,6 +148,17 @@ public class AdminSubscriptionController {
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
             model.addAttribute("errorMessage", errorMessage);
+
+            Set<String> logins = new HashSet<>();
+
+            List<Client> clients = clientService.getAllClients();
+
+            for (Client client:
+                    clients) {
+                logins.add(client.getLogin());
+            }
+
+            model.addAttribute("logins", logins);
 
             model.addAttribute("add", false);
             return "subscription-form";
