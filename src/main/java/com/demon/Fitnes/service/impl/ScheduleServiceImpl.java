@@ -26,7 +26,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> getSllSchedules() {
+    public List<Schedule> getAllSchedules() {
         List<Schedule> schedules = scheduleRepository.findAllSchedules();
 
         for (Schedule schedule:
@@ -45,17 +45,15 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<Schedule> getClientSchedules(String clientLogin) {
         List<Schedule> clientSchedules = scheduleRepository.findClientSchedules(clientLogin);
 
-        if (clientSchedules.isEmpty()) {
-            clientSchedules = scheduleRepository.findAllSchedules();
-        }
+        if (!clientSchedules.isEmpty()) {
+            for (Schedule schedule :
+                    clientSchedules) {
+                Service service = serviceRepository.findById(schedule.getService().getId()).get();
+                schedule.setService(service);
 
-        for (Schedule schedule:
-                clientSchedules) {
-            Service service = serviceRepository.findById(schedule.getService().getId()).get();
-            schedule.setService(service);
-
-            Coach coach = coachRepository.findByLogin(schedule.getCoach().getLogin()).orElse(null);
-            schedule.setCoach(coach);
+                Coach coach = coachRepository.findByLogin(schedule.getCoach().getLogin()).orElse(null);
+                schedule.setCoach(coach);
+            }
         }
 
         return clientSchedules;

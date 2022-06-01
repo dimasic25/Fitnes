@@ -32,6 +32,19 @@ public class ScheduleController {
         } else {
             List<Schedule> schedules = scheduleService.getClientSchedules((String) session.getAttribute("login"));
             model.addAttribute("schedules", schedules);
+            model.addAttribute("all", false);
+            return "schedules";
+        }
+    }
+
+    @GetMapping("/all")
+    public String showAllSchedules(Model model, HttpSession session) {
+        if (!rightService.isUserAuthored(session, model)) {
+            return "forbbiden";
+        } else {
+            List<Schedule> schedules = scheduleService.getAllSchedules();
+            model.addAttribute("schedules", schedules);
+            model.addAttribute("all", true);
             return "schedules";
         }
     }

@@ -30,7 +30,7 @@ public class AdminScheduleController {
         if (!rightService.isUserAdmin(session, model)) {
             return "forbbiden";
         } else {
-            List<Schedule> schedules = scheduleService.getSllSchedules();
+            List<Schedule> schedules = scheduleService.getAllSchedules();
             model.addAttribute("schedules", schedules);
             return "schedules";
         }

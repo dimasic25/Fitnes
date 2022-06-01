@@ -33,9 +33,16 @@
         <a class="nav-link" th:if="${isAdmin}" href="/admin/coaches">Тренеры</a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" th:unless="${isAdmin}" href="/schedule">Расписание занятий</a>
+    <li class="nav-item dropdown" th:unless="${isAdmin}">
+        <a class="nav-link dropdown-toggle" href="/schedule/all" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Расписание занятий
+        </a>
+     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="/schedule/all">Все услуги</a></li>
+        <li><a class="dropdown-item" href="/schedule">Мои услуги</a></li>
+    </ul>
     </li>
+
     <li class="nav-item">
         <a class="nav-link" th:if="${isAdmin}" href="/admin/schedule">Расписание занятий</a>
     </li>

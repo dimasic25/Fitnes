@@ -15,6 +15,9 @@
         <h1>Расписание занятий</h1>
 
         <div th:unless="${isAdmin}">
+            <h2 th:if="${all}">Все услуги</h2>
+            <h2 th:unless="${all}">Мои услуги</h2>
+
             <div th:if="${schedules.isEmpty()}">
                 <h2>Расписаний нет!</h2>
             </div>

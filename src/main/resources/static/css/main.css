@@ -44,11 +44,31 @@ label {
     border-bottom: 1px solid #808080;
 }
 
-.nav-link {
+.dropdown-menu {
+    background-color: black;
+}
+
+.dropdown-menu:focus {
+    background-color: black;
+}
+
+.nav-link, .nav-link:focus {
     color: yellow;
 }
 
 .nav-link:hover {
+    color: yellow;
+    text-decoration-line: underline;
+    transition: width 0.3s ease-out;
+}
+
+.dropdown-item {
+    color: yellow;
+    font-size: 20px;
+}
+
+.dropdown-item:hover {
+    background-color: black;
     color: yellow;
     text-decoration-line: underline;
     transition: width 0.3s ease-out;
