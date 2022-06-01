@@ -13,9 +13,9 @@
 
     <main class="container main mt-4">
         <h1>Расписание занятий</h1>
-        <a class="btn" href="/schedule/all">Меню услуг</a>
 
         <div th:unless="${isAdmin}">
+            <a class="btn" href="/schedule/all">Меню услуг</a>
 
             <div th:if="${schedules.isEmpty()}">
                 <h2>Расписаний нет!</h2>

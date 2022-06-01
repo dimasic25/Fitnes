@@ -57,7 +57,8 @@ public class ServiceSubscriptionServiceImpl implements ServiceSubsriptionService
     public void update(ServiceSubscription serviceSubscription) throws Exception {
         List<Integer> groupNumbers = scheduleRepository.findGroupNumbersByService(serviceSubscription.getService().getId());
         if (groupNumbers.contains(serviceSubscription.getGroupNumber())) {
-            serviceSubscriptionRepository.update(serviceSubscription);
+            serviceSubscriptionRepository.delete(serviceSubscription.getService().getId(), serviceSubscription.getSubscription().getId());
+            serviceSubscriptionRepository.insert(serviceSubscription);
         } else {
             throw new Exception("Группа в данный момент недоступна! Выберите другую!");
         }
