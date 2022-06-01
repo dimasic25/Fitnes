@@ -9,5 +9,7 @@ public interface ScheduleService {
 
     List<Schedule> getClientSchedules(String clientLogin);
 
+    List<Schedule> getSchedulesByService(Long serviceId);
+
     List<Integer> getGroupNumbers();
 }

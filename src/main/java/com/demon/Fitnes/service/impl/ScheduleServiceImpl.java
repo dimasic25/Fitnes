@@ -60,6 +60,22 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public List<Schedule> getSchedulesByService(Long serviceId) {
+        List<Schedule> schedules = scheduleRepository.findSchedulesByService(serviceId);
+
+        for (Schedule schedule:
+                schedules) {
+            Service service = serviceRepository.findById(schedule.getService().getId()).get();
+            Coach coach = coachRepository.findByLogin(schedule.getCoach().getLogin()).orElse(null);
+
+            schedule.setService(service);
+            schedule.setCoach(coach);
+        }
+
+        return schedules;
+    }
+
+    @Override
     public List<Integer> getGroupNumbers() {
         return scheduleRepository.findAllGroupNumbers();
     }

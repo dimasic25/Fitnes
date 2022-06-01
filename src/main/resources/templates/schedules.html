@@ -13,10 +13,9 @@
 
     <main class="container main mt-4">
         <h1>Расписание занятий</h1>
+        <a class="btn" href="/schedule/all">Меню услуг</a>
 
         <div th:unless="${isAdmin}">
-            <h2 th:if="${all}">Все услуги</h2>
-            <h2 th:unless="${all}">Мои услуги</h2>
 
             <div th:if="${schedules.isEmpty()}">
                 <h2>Расписаний нет!</h2>
@@ -56,6 +55,7 @@
 
     <div th:replace="fragments/footer">
     </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
