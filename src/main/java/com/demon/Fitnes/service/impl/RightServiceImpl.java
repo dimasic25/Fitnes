@@ -24,8 +24,10 @@ public class RightServiceImpl implements RightService {
         boolean isPresent = clientRepository.findByLogin(login).isPresent();
 
         if (!isPresent) {
+            model.addAttribute("isAuth", false);
             return false;
         } else {
+            model.addAttribute("isAuth", true);
             model.addAttribute("client", clientRepository.findByLogin(login).get());
             return true;
         }

@@ -27,14 +27,14 @@ public class DiscountController {
 
     @GetMapping
     public String showClientDiscounts(Model model, HttpSession session) {
+        List<Discount> discounts;
         if (!rightService.isUserAuthored(session, model)) {
-            return "forbbiden";
+             discounts = discountService.getAllDiscounts();
         } else {
             String login = (String) session.getAttribute("login");
-            List<Discount> discounts = discountService.getDiscountsByClient(login);
-
-            model.addAttribute("discounts", discounts);
-            return "discounts";
+            discounts = discountService.getDiscountsByClient(login);
         }
+        model.addAttribute("discounts", discounts);
+        return "discounts";
     }
 }

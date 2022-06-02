@@ -115,3 +115,11 @@ label {
     color: black;
     transform: scale(1.02);
 }
+
+.form-control, .form-select {
+    width: 200px;
+}
+
+.discount-select {
+    width: 250px;
+}

@@ -43,23 +43,19 @@ public class ScheduleController {
 
     @GetMapping("/all")
     public String showSchedulesMenu(Model model, HttpSession session) {
-        if (!rightService.isUserAuthored(session, model)) {
-            return "forbbiden";
-        } else {
-            List<Service> services = servService.getServices();
-            model.addAttribute("services", services);
-            return "schedules-menu";
-        }
+        rightService.isUserAuthored(session, model);
+
+        List<Service> services = servService.getServices();
+        model.addAttribute("services", services);
+        return "schedules-menu";
     }
 
     @GetMapping("/{serviceId}")
     public String showServiceSchedules(Model model, HttpSession session, @PathVariable Long serviceId) {
-        if (!rightService.isUserAuthored(session, model)) {
-            return "forbbiden";
-        } else {
-            List<Schedule> schedules = scheduleService.getSchedulesByService(serviceId);
-            model.addAttribute("schedules", schedules);
-            return "schedules";
-        }
+        rightService.isUserAuthored(session, model);
+
+        List<Schedule> schedules = scheduleService.getSchedulesByService(serviceId);
+        model.addAttribute("schedules", schedules);
+        return "schedules";
     }
 }

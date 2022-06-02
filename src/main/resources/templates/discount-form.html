@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
-<div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
+    <div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin}, ${isAuth})}"></div>
 
 <main class="container main mt-4">
     <h1>Добавить скидку клиенту</h1>
@@ -28,7 +28,7 @@
 
         <div class="mb-3">
             <label for="discount" class="form-label">Скидка</label>
-            <select class="form-select" id="discount" th:field="*{id}">
+            <select class="form-select discount-select" id="discount" th:field="*{id}">
                 <th:block th:each="select_discount, state : ${discounts}">
                     <option th:if="${state.first}" selected th:value="${select_discount.id}" th:label="${select_discount.service.name} + ' (' + ${select_discount.amount} + ' %)'"></option>
                     <option th:unless="${state.first}" th:value="${select_discount.id}" th:label="${select_discount.service.name} + ' (' + ${select_discount.amount} + ' %)'"></option>

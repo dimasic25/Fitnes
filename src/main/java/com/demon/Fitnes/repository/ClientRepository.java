@@ -53,7 +53,10 @@ public class ClientRepository {
     public List<Client> getAllClients() {
         final String sql = """
                 SELECT c.client_login, c.client_first_name,  c.client_second_name, c.client_middle_name, c.client_birthday,
-                 c.client_phone from client c;            
+                 c.client_phone from client c
+                 LEFT JOIN admin A
+                 ON c.client_login = A.client_login
+                 WHERE A.client_login IS NULL;            
                 """;
 
         return jdbcTemplate.query(sql, ClientMapper.MAPPER);

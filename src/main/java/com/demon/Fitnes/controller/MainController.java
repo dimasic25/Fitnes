@@ -27,12 +27,17 @@ public class MainController {
         this.rightService = rightService;
     }
 
-    @GetMapping(value = {"/", "/login"})
+    @GetMapping(value = {"/"})
+    public String index() {
+        return "redirect:/discounts";
+    }
+
+    @GetMapping(value = { "/login"})
     public String showLoginForm(Model model) {
         Client client = new Client();
 
         model.addAttribute("client", client);
-        return "index";
+        return "login";
     }
 
     @PostMapping("/verify")
@@ -50,7 +55,7 @@ public class MainController {
         } catch (Exception e) {
             String errorMessage = e.getMessage();
             model.addAttribute("errorMessage", errorMessage);
-            return "index";
+            return "login";
         }
     }
 
@@ -86,6 +91,8 @@ public class MainController {
     public String logout(HttpSession session) {
         session.removeAttribute("client");
         session.removeAttribute("isAdmin");
-        return "redirect:/";
+        session.removeAttribute("isAuth");
+        session.removeAttribute("login");
+        return "redirect:/login";
     }
 }

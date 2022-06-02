@@ -27,12 +27,10 @@ public class ServiceController {
 
     @GetMapping
     public String showAllServices(Model model, HttpSession session) {
-        if (!rightService.isUserAuthored(session, model)) {
-            return "forbbiden";
-        } else {
-            List<Service> serviceList = servService.getServices();
-            model.addAttribute("services", serviceList);
-            return "services";
-        }
+        rightService.isUserAuthored(session, model);
+
+        List<Service> serviceList = servService.getServices();
+        model.addAttribute("services", serviceList);
+        return "services";
     }
 }

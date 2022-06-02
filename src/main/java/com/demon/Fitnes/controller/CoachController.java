@@ -27,12 +27,10 @@ public class CoachController {
 
     @GetMapping
     public String showCoachesPage(Model model, HttpSession session) {
-        if (!rightService.isUserAuthored(session, model)) {
-            return "forbbiden";
-        } else {
-            List<Coach> coaches = coachService.getCoaches();
-            model.addAttribute("coaches", coaches);
-            return "coaches";
-        }
+        rightService.isUserAuthored(session, model);
+
+        List<Coach> coaches = coachService.getCoaches();
+        model.addAttribute("coaches", coaches);
+        return "coaches";
     }
 }

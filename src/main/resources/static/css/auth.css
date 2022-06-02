@@ -55,6 +55,15 @@
     text-decoration: none;
 }
 
+.input-without-auth {
+    margin-top: 10px;
+}
+
+.input-without-auth a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
 body {
     background-image: url("../img/fitnes.jpg");
     background-repeat: no-repeat;

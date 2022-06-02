@@ -8,12 +8,13 @@
 </head>
 <body>
 <div class="wrapper">
-<div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin})}"></div>
+    <div th:replace="~{fragments/nav-panel::nav-panel(${client}, ${isAdmin}, ${isAuth})}"></div>
 
 
 <main class="container main mt-4">
     <div th:unless="${isAdmin}">
-    <h1>Ваши скидки</h1>
+    <h1 th:unless="${isAuth}">Cкидки</h1>
+        <h1 th:if="${isAuth}">Ваши скидки</h1>
 
     <div th:if="${discounts.isEmpty()}">
         <h2>Вам ещё не доступны скидки!</h2>
