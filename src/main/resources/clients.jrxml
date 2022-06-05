@@ -133,7 +133,7 @@
             <textElement>
                 <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
             </textElement>
-            <textFieldExpression><![CDATA[$F{middleName}]]></textFieldExpression>
+            <textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
         </textField>
         <textField textAdjust="StretchHeight">
             <reportElement x="276" y="0" width="92" height="20" uuid="e3117b98-3143-4239-aeb6-7e7d994a9a6c">
@@ -142,7 +142,7 @@
             <textElement>
                 <font size="14" fontName="Tahoma" pdfEncoding="Cp1251"/>
             </textElement>
-            <textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
+            <textFieldExpression><![CDATA[$F{middleName}]]></textFieldExpression>
         </textField>
         <textField textAdjust="StretchHeight">
             <reportElement x="368" y="0" width="92" height="20" uuid="fd66f795-c10d-4f8e-a982-54fc9b9ec5c8">

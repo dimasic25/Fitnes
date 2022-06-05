@@ -7,8 +7,9 @@ public class ReportServiceMapper {
 
     public static final RowMapper<ReportService> MAPPER = (rs, rowNum) -> {
         ReportService reportService = new ReportService();
-       reportService.setServiceName(rs.getString("name"));
-       reportService.setCountSubscriptions(rs.getInt("count_subs"));
+        reportService.setServiceName(rs.getString("name"));
+        reportService.setCountSubscriptions(rs.getInt("count_subs"));
+        reportService.setServicePrice(rs.getLong("price"));
 
         return reportService;
     };

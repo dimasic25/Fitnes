@@ -33,11 +33,11 @@ public class ReportRepository {
 
     public List<ReportService> getReportServices() {
         final String sql = """
-                   SELECT name, count(subscription_id) AS count_subs
+                   SELECT name, count(SS.subscription_id) AS count_subs, sum(service_price * number_sessions) AS price
                                 FROM service S 
                                          INNER JOIN service_subscription SS ON S.service_id = SS.service_id
                                 GROUP BY name
-                                ORDER BY count_subs DESC;            
+                                ORDER BY price DESC, count_subs DESC;            
                     """;
 
         return jdbcTemplate.query(sql, ReportServiceMapper.MAPPER);

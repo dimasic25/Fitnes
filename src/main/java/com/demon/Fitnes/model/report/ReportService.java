@@ -7,4 +7,5 @@ public class ReportService {
 
     private String serviceName;
     private Integer countSubscriptions;
+    private Long servicePrice;
 }
