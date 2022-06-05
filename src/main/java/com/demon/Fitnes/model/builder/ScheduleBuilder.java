@@ -5,13 +5,14 @@ import com.demon.Fitnes.model.Schedule;
 import com.demon.Fitnes.model.Service;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 public final class ScheduleBuilder {
     private Long id;
     private Service service;
     private Coach coach;
-    private Time startTime;
-    private Time endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String weekday;
     private Integer groupNumber;
 
@@ -37,12 +38,12 @@ public final class ScheduleBuilder {
         return this;
     }
 
-    public ScheduleBuilder startTime(Time startTime) {
+    public ScheduleBuilder startTime(LocalTime startTime) {
         this.startTime = startTime;
         return this;
     }
 
-    public ScheduleBuilder endTime(Time endTime) {
+    public ScheduleBuilder endTime(LocalTime endTime) {
         this.endTime = endTime;
         return this;
     }

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 
 public class ScheduleMapper implements RowMapper<Schedule> {
     @Override
@@ -24,8 +25,8 @@ public class ScheduleMapper implements RowMapper<Schedule> {
                     .id(rs.getLong("schedule_id"))
                     .coach(coach)
                     .service(service)
-                    .startTime(rs.getTime("start_time"))
-                    .endTime(rs.getTime("end_time"))
+                    .startTime(LocalTime.parse(rs.getString("start_time")))
+                    .endTime(LocalTime.parse(rs.getString("end_time")))
                     .weekday(WeekdayConverter.fromInt(rs.getInt("weekday")))
                     .groupNumber(rs.getInt("schedule_group_number"))
                     .build();

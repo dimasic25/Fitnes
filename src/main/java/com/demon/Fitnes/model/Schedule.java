@@ -2,7 +2,8 @@ package com.demon.Fitnes.model;
 
 import lombok.Data;
 
-import java.sql.Time;
+import java.time.LocalTime;
+
 
 @Data
 public class Schedule {
@@ -10,8 +11,8 @@ public class Schedule {
     private Long id;
     private Service service;
     private Coach coach;
-    private Time startTime;
-    private Time endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String weekday;
     private Integer groupNumber;
 }
